@@ -15,9 +15,9 @@ public class ByteParty {
             numbers[i] = number;
         }
 
-        while(isParty) {
+        while (isParty) {
             String userCommand = scanner.nextLine();
-            if("party over".equals(userCommand)) {
+            if ("party over".equals(userCommand)) {
                 isParty = false;
                 continue;
             }
@@ -26,19 +26,19 @@ public class ByteParty {
             int pattern = Integer.parseInt(tokens[0]);
             int position = Integer.parseInt(tokens[1]);
 
-            for (int i = 0; i < numbers.length; i++) {
-                switch (pattern) {
-                    case 1:
-                        changeValueToOne(numbers, position);
-                        break;
-                    case 0:
-                        changeValueToZero(numbers, position);
-                        break;
-                    case -1:
-                        changeValueToMinusOne(numbers, position, i);
-                        break;
-                }
+
+            switch (pattern) {
+                case 1:
+                    changeValueToOne(numbers, position);
+                    break;
+                case 0:
+                    changeValueToZero(numbers, position);
+                    break;
+                case -1:
+                    changeValueToMinusOne(numbers, position);
+                    break;
             }
+
         }
 
         for (int number : numbers) {
@@ -58,18 +58,20 @@ public class ByteParty {
         }
     }
 
-    private static void changeValueToMinusOne(int[] numbers, int position, int i) {
-        int a = numbers[i];
-        int b = a >> position;
-        int c = b & 1;
-        if (c == 0) {
-            int d = 1 << position;
-            int result = a | d;
-            numbers[i] = result;
-        } else {
-            int d = ~(1 << position);
-            int result = a & d;
-            numbers[i] = result;
+    private static void changeValueToMinusOne(int[] numbers, int position) {
+        for (int i = 0; i < numbers.length; i++) {
+            int a = numbers[i];
+            int b = a >> position;
+            int c = b & 1;
+            if (c == 0) {
+                int d = 1 << position;
+                int result = a | d;
+                numbers[i] = result;
+            } else {
+                int d = ~(1 << position);
+                int result = a & d;
+                numbers[i] = result;
+            }
         }
     }
 
