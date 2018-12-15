@@ -7,7 +7,7 @@ public class Party {
         Scanner scanner = new Scanner(System.in);
         Set<String> invitedGuests = new TreeSet<>();
         boolean isOver = false;
-        
+
         while(!isOver) {
             String input = scanner.nextLine();
             if("END".equals(input)) {
