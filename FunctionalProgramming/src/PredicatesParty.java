@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class PredicatesParty {
@@ -13,7 +14,7 @@ public class PredicatesParty {
 
         List<String> partyGoers = Arrays.stream(reader.readLine()
                 .split("\\s+")).collect(Collectors.toList());
-        
+
         while(!isParty) {
             String[] userInput = reader.readLine().split("\\s+");
 
@@ -45,8 +46,11 @@ public class PredicatesParty {
             }
 
         }
+
+        Predicate<List<String>> fullParty = party -> party.size() > 0;
         Collections.sort(partyGoers);
-        if(partyGoers.size() > 0) {
+
+        if(fullParty.test(partyGoers)) {
             String output = String.join(", ",partyGoers);
             System.out.println(output + " are going to the party!");
         } else {
