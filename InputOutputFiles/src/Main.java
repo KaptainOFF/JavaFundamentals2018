@@ -1,22 +1,16 @@
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 
 public class Main {
     public static void main(String[] args) {
         String resourceFolder = "C:\\Users\\ykapitanov\\IntelliJ\\" +
                 "JavaFundamentals2018\\InputOutputFiles\\resources\\";
 
-        String path = resourceFolder + "input.txt";
+        String serializableObject = resourceFolder + "object.ser";
+        FootballPlayer footballPlayer = new FootballPlayer("Salah",27,"Liverpool",170000);
 
-        try (FileInputStream fileInputStream = new FileInputStream(path);){
-
-            int oneByte = fileInputStream.read();
-
-            while(oneByte >= 0) {
-                System.out.printf("%s ", oneByte);
-                oneByte = fileInputStream.read();
-            }
-
+        try(FileOutputStream fos = new FileOutputStream(serializableObject);
+            ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+            oos.writeObject(footballPlayer);
         } catch (IOException e) {
             e.printStackTrace();
         }
