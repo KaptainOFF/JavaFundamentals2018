@@ -22,10 +22,10 @@ public class OptionalNames {
 
         Optional<String> namesToPrint = names.stream()
                 .filter( name -> letters.contains(name.charAt(0)))
-                .findAny();
+                .findFirst();
 
         if (namesToPrint.isPresent()) {
-            namesToPrint.stream().forEach(name -> System.out.print(name + " "));
+            System.out.println(namesToPrint.get());
         } else {
             System.out.println("No match");
         }
